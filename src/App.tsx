@@ -19,6 +19,7 @@ function App() {
   }
 
   const removeBook = (id: string) => {
+    alert(`Are you sure to remove the book: ${bookList.find(book => book.id === id)?.name}`)
     setBookList(bookList.filter(book => book.id !== id))
   }
 
