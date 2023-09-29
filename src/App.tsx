@@ -1,32 +1,26 @@
 import { useState } from 'react'
 import './App.css'
-import { BookForm } from './pages/bookForm'
-import { BookList } from './pages/bookList'
-import { bookListData } from './database/localData/bookData'
-
-export interface Book {
-  id: string
-  name: string
-  description?: string
-  createdAt?: Date
-}
+import { Topic } from './models/topic'
+import { topicListData } from './database/localData/topicData'
+import { TopicForm } from './pages/topicForm'
+import { TopicList } from './pages/topicList'
 
 function App() {
-  const [bookList, setBookList] = useState<Book[]>(bookListData)
+  const [topicList, setTopicList] = useState<Topic[]>(topicListData)
 
-  const addBook = (book: Book) => {
-    setBookList([book, ...bookList])
+  const addtopic = (topic: Topic) => { 
+    setTopicList([topic, ...topicList])
   }
 
-  const removeBook = (id: string) => {
-    alert(`Are you sure to remove the book: ${bookList.find(book => book.id === id)?.name}`)
-    setBookList(bookList.filter(book => book.id !== id))
+  const removetopic = (id: string) => {
+    alert(`Are you sure to remove the topic: ${topicList.find(topic => topic.id === id)?.name}`)
+    setTopicList(topicList.filter(topic => topic.id !== id))
   }
 
   return (
     <>
-      <BookForm onSubmit={addBook}/>
-      <BookList onRemove={removeBook} data={bookList}/>
+      <TopicForm onSubmit={addtopic}/>
+      <TopicList onRemove={removetopic} data={topicList}/>
     </>
   )
 }
