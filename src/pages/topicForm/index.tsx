@@ -1,7 +1,7 @@
 import { useRef, useState } from "react"
 import {v4 as uuid} from 'uuid';
 import { Topic } from "../../models/topic";
-import { authors } from "../../database/localData/topicData";
+import { authors } from "../../database/authors";
 
 interface topicFormProps {
     onSubmit: (topic: Topic) => void

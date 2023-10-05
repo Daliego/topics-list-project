@@ -1,5 +1,4 @@
 import { Author } from "./author"
-
 export interface Topic {
     id: string
     name: string
