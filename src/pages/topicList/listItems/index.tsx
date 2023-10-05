@@ -26,7 +26,7 @@ export const ListItem = ({topic, onRemove}: ListItemsProps) => {
     }
 
     return (
-        <div style={{padding: '10px'}} key={topic.id}>
+        <div  key={topic.id} className='items'>
             <div style={{display: 'flex', flexDirection: 'column', border: '1px', borderStyle: 'solid', borderRadius: '10px', borderColor: 'white', padding: '8px'}}>
                 <div style={{display: 'flex', justifyContent: 'left', alignContent: 'start', flexDirection: 'row'}}>
                     <h4 style={{justifyContent: 'start'}}><AiOutlineUser /> {topic.autor.name}</h4>

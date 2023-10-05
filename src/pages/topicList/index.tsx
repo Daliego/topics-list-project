@@ -11,7 +11,7 @@ export const TopicList = ({data, onRemove}: topicListProps) => {
         onRemove(id)
     }
     return (
-        <ul>
+        <ul className="topicsScreen">
             {data.map(topic => <ListItem onRemove={handleRemove} key={topic.id} topic={topic}></ListItem>)}
         </ul>
     )    
