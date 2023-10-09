@@ -1,28 +1,27 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Topic } from "../../../models/topic"
 import { ButtonInput } from "../buttonInput"
 import { AiOutlineUser } from 'react-icons/ai'
+import { TopicsDispatchContext } from '../../../contexts/topicsCotests'
+import { ActionType } from '../../../reducers/topicReducer'
 
 interface ListItemsProps {
     topic: Topic
-    onRemove: (id: string) => void
 }
 
-export const ListItem = ({topic, onRemove}: ListItemsProps) => {
+export const ListItem = ({topic}: ListItemsProps) => {
+    const dispatch = useContext(TopicsDispatchContext)!;
 
     const [like, setLike] = useState<number>(topic.likes);
-    // const [deslike, setDeslike] = useState<number>(0);
-
-    // const [upStateLike, setUpStateLike] = useState(false)
-    // const [upStatedesLike, setUpStatedesLike] = useState(false)
-
+    
     const onLike = (likeNumber: number) => {
         setLike(Number(like) + likeNumber)
         console.log(like)
     }
 
     const handleRemove = () => {
-        onRemove(topic.id)
+        alert(`Are you sure to remove the topic: ${topic.name} ?`)
+        dispatch({type: ActionType.DELETED, payload: { id: topic.id }})
     }
 
     return (

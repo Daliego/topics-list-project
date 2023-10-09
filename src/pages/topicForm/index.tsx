@@ -1,13 +1,13 @@
-import { useRef, useState } from "react"
+import { useRef, useState, useContext } from "react"
 import {v4 as uuid} from 'uuid';
 import { Topic } from "../../models/topic";
 import { authors } from "../../database/authors";
+import { TopicsDispatchContext } from "../../contexts/topicsCotests";
+import { ActionType } from "../../reducers/topicReducer";
+import { postTopics } from "../../services/api";
 
-interface topicFormProps {
-    onSubmit: (topic: Topic) => void
-}
-
-export function TopicForm({onSubmit} : topicFormProps) {
+export function TopicForm() {
+    const dispatch = useContext(TopicsDispatchContext)!
     const topicText = useRef<HTMLInputElement>(null)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -25,7 +25,18 @@ export function TopicForm({onSubmit} : topicFormProps) {
             createdAt: new Date(),
         }
 
-        onSubmit(topic)
+        const addtopic = async (topic: Topic) => {
+            dispatch({type: ActionType.ADDED, payload: { topic }})
+            
+            await postTopics(topic).then(response => {
+                if (!response.ok) {
+                  alert("The topic upload has failed")
+                  dispatch({type: ActionType.DELETED, payload: { id: topic.id }})
+                }
+            })
+        }
+
+        addtopic(topic)
 
         topicText.current!.value = ""
     }

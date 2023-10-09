@@ -17,9 +17,10 @@ export enum ActionType {
 type AddAction = { type: ActionType.ADDED; payload: { topic: Topic } };
 type DeleteAction = { type: ActionType.DELETED; payload: { id: string } };
 type LoadAction = {type: ActionType.LOAD; payload: { topics: Topic[] } };
+
 //Função com switch para executar a lógica de cada reducer
 
-type Action = AddAction | DeleteAction | LoadAction;
+export type Action = AddAction | DeleteAction | LoadAction;
 
 function reducer(state: TopicState, action: Action) {
   switch (action.type) {

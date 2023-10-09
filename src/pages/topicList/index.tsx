@@ -1,18 +1,14 @@
-import { Topic } from "../../models/topic"
+import { useContext } from "react"
 import { ListItem } from "./listItems"
+import { TopicsStateContext } from "../../contexts/topicsCotests"
 
-interface topicListProps {
-    data: Topic[]
-    onRemove: (id: string) => void
-}
+export const TopicList = () => {
+    const data = useContext(TopicsStateContext)
 
-export const TopicList = ({data, onRemove}: topicListProps) => {
-    const handleRemove = (id: string) => {
-        onRemove(id)
-    }
     return (
         <ul className="topicsScreen">
-            {data.map(topic => <ListItem onRemove={handleRemove} key={topic.id} topic={topic}></ListItem>)}
+            {data.map(topic => <ListItem key={topic.id} topic={topic}></ListItem>)}
+            {/* {dataFromProps.map(topic => <ListItem onRemove={handleRemove} key={topic.id} topic={topic}></ListItem>)} */}
         </ul>
     )    
 }
